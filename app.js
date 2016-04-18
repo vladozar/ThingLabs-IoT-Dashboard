@@ -1,7 +1,15 @@
-express = require('express.io')
+var express = require('express.io')
+var uuid = require('uuid');
+var EventHubClient = require('azure-event-hubs').Client;
+var IotHubClient = require('azure-iothub').Client;
+var Message = require('azure-iot-common').Message;
+
 app = express().http().io()
 
-var connectionString = process.env.THINGLABS_EVENTHUB_CONNSTRING || '<eventhub connection string>'
+var iotHubConnectionString = process.env.THINGLABS_IOTHUB_CONNSTRING || ''
+var eventHubConnectionString = process.env.THINGLABS_EVENTHUB_CONNSTRING || ''
+var client = EventHubClient.fromConnectionString(eventHubConnectionString, 'thinglabseventhub')
+
 // Setup your sessions, just like normal.
 app.use(express.cookieParser())
 app.use(express.session({secret: 'thinglabs'}))
@@ -12,11 +20,36 @@ app.get('/', function(req, res) {
     res.sendfile(__dirname + '/index.html')
 });
 
+app.post('/:deviceId/led/:state', function (req, res) { 
+    var deviceId = req.params.deviceId;
+    var ledState = req.params.state;   
+    var messageData = '{"ledState":' + ledState + '}';
+    
+    var client = IotHubClient.fromConnectionString(iotHubConnectionString);
+    client.open(function (err) {
+        if (err) {
+            console.Log('Could not open the connection to the service: ' + err.message);
+        } else {
+            client.send(deviceId, messageData, function (err) {
+                if (err) {
+                    console.Log('Could not send the message to the service: ' + err.message);
+                } else {
+                    client.close(function (err) {
+                        if (err) {
+                            console.Log('Could not close the connection to the service: ' + err.message);
+                        }
+                    });
+                }
+            });
+        }
+    });
+    
+    res.status(200).end();
+});
+
 app.use(express.static(__dirname + '/static'));
 
 // Instantiate an eventhub client
-eventHubClient = require('azure-event-hubs').Client;
-var client = eventHubClient.fromConnectionString(connectionString, 'thinglabseventhub')
 
 app.io.route('ready', function(req) {
     // For each partition, register a callback function
