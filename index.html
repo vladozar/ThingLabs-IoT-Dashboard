@@ -7,6 +7,7 @@
         <meta name="description" content="Ivan R. Judson">
         <meta name="author" content="">
         <title>ThingLabs</title>
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/style.css">
 
@@ -43,11 +44,37 @@
         </nav>
         
         <div class="container">
-            <p>Welcome to ThingLabs</p>
-            <div class="graph"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Sending Cloud-to-Device (C2D) Messages</h2>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label for="deviceId">Device ID</label>
+                            <input type="text" class="form-control" id="deviceId" placeholder="your device id" width="25%">
+                        </div>
+                        <button id="ledOn" class="btn btn-large btn-success"> LED ON </button>
+                        <button id="ledOff" class="btn btn-large btn-danger"> LED OFF </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <br><br><br><br><br><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Storing and Displaying Data</h2>
+                    <div class="graph"></div>
+                </div>
+            </div>
         </div>
+        
         <script src="/socket.io/socket.io.js"></script>
         <script src="http://d3js.org/d3.v3.min.js"></script>
         <script src="/js/graph.js"></script>
+        <script src="/js/led.js"></script>
     </body>
 </html>
