@@ -9,8 +9,11 @@ var n = 60,
     timeDeltas = [],
     accumulatedTime = 0,
     averageWindowTime = 0,
-    sampleCount = 0,
-    labels = ['minlight', 'avglight', 'maxlight'];
+    sampleCount = 0;
+
+// These properties were used in the Thingy4Windows labs
+//var labels = ['minlight', 'avglight', 'maxlight'];
+var labels = ['mintemperature', 'avgtemperature', 'maxtemperature'];
 
 var io = io.connect();
                        
@@ -35,7 +38,7 @@ var x = d3.time.scale()
     .range([0, width]);
 
 var y = d3.scale.linear()
-    .domain([0, 1024])
+    .domain([0, 50])
     .range([height, 0]);
 
 var line = d3.svg.line()
