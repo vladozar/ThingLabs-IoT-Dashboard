@@ -9,6 +9,7 @@
         <title>ThingLabs</title>
         <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/lib/c3.min.css">
         <link rel="stylesheet" href="/css/style.css">
 
         <!-- Favicon Bits -->
@@ -67,13 +68,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2>Storing and Displaying Data</h2>
-                    <div class="graph"></div>
+                    <div id="graph"></div>
                 </div>
             </div>
         </div>
         
         <script src="/socket.io/socket.io.js"></script>
-        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="/lib/d3.v3.min.js"></script>
+        <script src="/lib/c3.min.js"></script>
         <script src="/js/graph.js"></script>
         <script src="/js/led.js"></script>
     </body>
