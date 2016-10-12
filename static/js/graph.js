@@ -26,6 +26,9 @@ var appendColumn = function (index, label, value) {
     if (columns.length <= index) {
         columns.push([label]);
     }
+    if(!value){
+        console.log('value is null');
+    }
     columns[index].push(value);
     if (columns[index].length > DATA_POINT_COUNT) {
         columns[index].splice(1, 1);
