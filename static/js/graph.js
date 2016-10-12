@@ -23,15 +23,16 @@ var labels = null;
 var columns = [];
 
 var appendColumn = function (index, label, value) {
-    if (columns.length <= index) {
-        columns.push([label]);
-    }
     if(!value){
-        console.log('value is null');
-    }
-    columns[index].push(value);
-    if (columns[index].length > DATA_POINT_COUNT) {
-        columns[index].splice(1, 1);
+        console.log('value is null ' + label + ' is skipped');
+    } else{
+        if (columns.length <= index) {
+            columns.push([label]);
+        }
+        columns[index].push(value);
+        if (columns[index].length > DATA_POINT_COUNT) {
+            columns[index].splice(1, 1);
+        }
     }
 };
 
