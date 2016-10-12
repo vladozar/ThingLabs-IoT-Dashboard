@@ -8,7 +8,7 @@ app = express().http().io()
 
 var iotHubConnectionString = process.env.THINGLABS_IOTHUB_CONNSTRING || ''
 var eventHubConnectionString = process.env.THINGLABS_EVENTHUB_CONNSTRING || ''
-var client = EventHubClient.fromConnectionString(eventHubConnectionString, 'thinglabseventhub')
+var client = EventHubClient.fromConnectionString(eventHubConnectionString, 'thinglabs-ritazh')
 
 // Setup your sessions, just like normal.
 app.use(express.cookieParser())
