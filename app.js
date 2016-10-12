@@ -24,7 +24,6 @@ app.post('/:deviceId/led/:state', function (req, res) {
     var deviceId = req.params.deviceId;
     var ledState = req.params.state;   
     var messageData = '{"ledState":' + ledState + '}';
-    
     var client = IotHubClient.fromConnectionString(iotHubConnectionString);
     client.open(function (err) {
         if (err) {

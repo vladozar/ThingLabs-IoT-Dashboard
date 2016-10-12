@@ -23,12 +23,16 @@ var labels = null;
 var columns = [];
 
 var appendColumn = function (index, label, value) {
-    if (columns.length <= index) {
-        columns.push([label]);
-    }
-    columns[index].push(value);
-    if (columns[index].length > DATA_POINT_COUNT) {
-        columns[index].splice(1, 1);
+    if(!value){
+        console.log('value is null ' + label + ' is skipped');
+    } else{
+        if (columns.length <= index) {
+            columns.push([label]);
+        }
+        columns[index].push(value);
+        if (columns[index].length > DATA_POINT_COUNT) {
+            columns[index].splice(1, 1);
+        }
     }
 };
 
@@ -46,10 +50,13 @@ io.on('data', function (incomingData) {
     if (labels === null) {
         initializeLabels(incomingData);
     }
-
-    appendColumn(0, 'x', new Date(incomingData.timestamp));
-    for (var i = 0; i < labels.length; i++) {
-        appendColumn(i + 1, labels[i], incomingData[labels[i]]);
+    if(incomingData.timestamp){
+        appendColumn(0, 'x', new Date(incomingData.timestamp));
+        for (var i = 0; i < labels.length; i++) {
+            appendColumn(i + 1, labels[i], incomingData[labels[i]]);
+        }
+    }else{
+        console.log('bad timestamp is skipped');   
     }
     chart.load({
         columns: columns
