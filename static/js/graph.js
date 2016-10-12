@@ -50,10 +50,13 @@ io.on('data', function (incomingData) {
     if (labels === null) {
         initializeLabels(incomingData);
     }
-
-    appendColumn(0, 'x', new Date(incomingData.timestamp));
-    for (var i = 0; i < labels.length; i++) {
-        appendColumn(i + 1, labels[i], incomingData[labels[i]]);
+    if(incomingData.timestamp){
+        appendColumn(0, 'x', new Date(incomingData.timestamp));
+        for (var i = 0; i < labels.length; i++) {
+            appendColumn(i + 1, labels[i], incomingData[labels[i]]);
+        }
+    }else{
+        console.log('bad timestamp is skipped');   
     }
     chart.load({
         columns: columns
