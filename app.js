@@ -24,7 +24,15 @@ app.get('/', function(req, res) {
 app.post('/:deviceId/led/:state', function (req, res) { 
     var deviceId = req.params.deviceId;
     var ledState = req.params.state;   
-    var messageData = '{"ledState":' + ledState + '}';
+    //var messageData = '{"ledState":' + ledState + '}';
+//    {
+//    "commandType": "iodb_write",
+//    "commandId":"<custom_command_id>",
+//    "iodb": {
+//        "<tag_name>": "<desired value>"
+//    }
+//}
+    var messageData = '{"commandType": "iodb_write","commandId":"ledCommand101","iodb": {"DO2": '+ ledState '}}'
     var client = IotHubClient.fromConnectionString(iotHubConnectionString);
     client.open(function (err) {
         if (err) {
