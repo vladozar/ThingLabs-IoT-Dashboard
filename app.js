@@ -32,7 +32,7 @@ app.post('/:deviceId/led/:state', function (req, res) {
 //        "<tag_name>": "<desired value>"
 //    }
 //}
-    var messageData = '{"commandType": "iodb_write","commandId":"ledCommand101","iodb": {"DO2": '+ ledState '}}'
+    var messageData = '{"commandType": "iodb_write","commandId":"ledCommand101","iodb": {"DO2": '+ ledState + '}}'
     var client = IotHubClient.fromConnectionString(iotHubConnectionString);
     client.open(function (err) {
         if (err) {
