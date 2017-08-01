@@ -50,8 +50,8 @@ io.on('data', function (incomingData) {
     if (labels === null) {
         initializeLabels(incomingData);
     }
-    if(incomingData.time){
-        appendColumn(0, 'x', new Date(incomingData.time));
+    if(incomingData.timestamp){
+        appendColumn(0, 'x', new Date(incomingData.timestamp));
         for (var i = 0; i < labels.length; i++) {
             appendColumn(i + 1, labels[i], incomingData[labels[i]]);
         }
